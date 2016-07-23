@@ -5,6 +5,8 @@ public class ArquivoTeste {
 	private Integer id;
 	
 	private String nome;
+	
+	private String email;
 
 	public Integer getId() {
 		return id;
