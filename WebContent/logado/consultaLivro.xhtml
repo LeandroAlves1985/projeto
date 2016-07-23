@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:layout style="min-width:400px; min-heigth:200px;">
+		<ui:include src="/template/template.xhtml"></ui:include>
+		<p:layoutUnit position="center">
+			<p:panel header="Consulta de Livros">
+				<h:form id="form1">
+					<p:dataTable value="#{mbLivro.listaLivro2}" var="linha">
+					
+						<p:column headerText="Nome do Livro" filterBy="#{linha.nomeLivro}" filterMatchMode="contains">
+							<h:outputText value="#{linha.nomeLivro}"/>
+						</p:column>
+						
+						<p:column headerText="Autor">
+							<h:outputText value="#{linha.nomeAutor}"/>
+						</p:column>
+						
+						<p:column headerText="Editora">
+							<h:outputText value="#{linha.nomeEditora}"/>
+						</p:column>
+						
+						<p:column headerText="Data de Publicação">
+							<p:calendar value="#{linha.dataPublicacao}" pattern="dd/MM/yyyy"/>
+						</p:column>
+						
+						<p:column headerText="Editar">
+							<p:commandButton value="Editar" action="#{mbLivro.altera}" ajax="true" update=":form1, :form2"
+							onclick="PF('janela').show()"/>
+						</p:column>
+						
+						<p:column headerText="Excluir">
+							<p:commandButton value="Excluir" action="#{mbLivro.excluir}" ajax="true" update=":form1"/>
+						</p:column>
+					
+					</p:dataTable>
+					<p:messages></p:messages>
+				</h:form>
+			</p:panel>
+			<p:dialog widgetVar="janela" modal="false" header="Atualização de Livro">
+				<h:form id="form2">
+					<p:panelGrid columns="2">
+						
+						<h:outputText value="Id Livro"/>
+						<h:inputHidden value="#{mbLivro.livroAltera.idLivro}"/>
+						
+						<h:outputText value="Nome do Livro"/>
+						<p:inputText value="#{mbLivro.livroAltera.nomeLivro}"/>
+						
+						<h:outputText value="Autor"/>
+						<p:inputText value="#{mbLivro.livroAltera.nomeAutor}"/>
+						
+						<h:outputText value="Editora"/>
+						<p:inputText value="#{mbLivro.livroAltera.nomeEditora}"/>
+						
+						<h:outputText value="Data de Publicação"/>
+						<p:calendar value="#{mbLivro.livroAltera.dataPublicacao}"/>
+						
+						<p:commandButton value="Atualizar" action="#{mbLivro.atualizar}" ajax="true" update=":form1, :form2"
+						onclick="PF('janela').hide()"/>
+						
+					</p:panelGrid>
+				</h:form>				
+			</p:dialog>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

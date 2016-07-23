@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:layout style="min-width:400px; min-heigth:200px;">
+		<ui:include src="/template/template.xhtml"></ui:include>
+		<p:layoutUnit position="center">
+			<p:panel header="Relatório de Locações Pendentes">
+				<h:form id="form1">
+					<p:dataTable value="#{mbLocacao.listaPend}" var="linha">
+					
+						<p:column headerText="Nome do Cliente" filterBy="#{linha.cliente.nome}" filterMatchMode="contains">
+							<h:outputText value="#{linha.cliente.nome}"/>
+						</p:column>
+						
+						<p:column headerText="CPF">
+							<h:outputText value="#{linha.cliente.cpf}"/>
+						</p:column>
+						
+						<p:column headerText="Livro" filterBy="#{linha.livro.nomeLivro}" filterMatchMode="contains">
+							<h:outputText value="#{linha.livro.nomeLivro}"/>
+						</p:column>
+						
+						<p:column headerText="Data de Locação">
+							<p:calendar value="#{linha.dataLocacao}" pattern="dd/MM/yyyy"/>
+						</p:column>
+						
+						<p:column headerText="Situação">
+							<h:outputText value="#{linha.status}"/>
+						</p:column>
+						
+						<p:column headerText="Devolver">
+							<p:commandButton value="Devolver" action="#{mbLocacao.altera}" ajax="true" update=":form1, :form2"
+							onclick="PF('janela').show()"/>
+						</p:column>	
+						
+						<p:column headerText="Email">
+							<p:commandButton value="Email" action="#{mbLocacao.preparaEmail}" ajax="true" update=":form1, :form3"
+							onclick="PF('janela2').show()"/>
+						</p:column>	
+						
+						<p:column headerText="Enviadas">
+							<p:commandButton value="Ver" action="#{mbLocacao.verEmail}" ajax="true" update=":form1, :form4 "
+							onclick="PF('janela3').show()"/>
+						</p:column>					
+						
+					</p:dataTable>
+					<p:messages></p:messages>
+				</h:form>
+			</p:panel>
+			<p:dialog widgetVar="janela" modal="false" header="Devolução de Livro">
+				<h:form id="form2">
+					<p:panelGrid columns="2">
+					
+						<h:outputText value="id Cliente"/>
+						<h:inputHidden value="#{mbLocacao.cliente.idPessoa}"/>
+					
+						<h:outputText value="Cliente"/>
+						<p:inputText value="#{mbLocacao.cliente.nome}"/>
+						
+						<h:outputText value="CPF"/>
+						<p:inputText value="#{mbLocacao.cliente.cpf}"/>
+						
+						<h:outputText value="id Livro"/>
+						<h:inputHidden value="#{mbLocacao.livro.idLivro}"/>
+						
+						<h:outputText value="Livro"/>
+						<p:inputText value="#{mbLocacao.livro.nomeLivro}"/>
+						
+						<h:outputText value="id Locacao"/>
+						<h:inputHidden value="#{mbLocacao.locacaoAltera.idLocacao}"/>
+						
+						<h:outputText value="Data de Locação"/>
+						<p:calendar value="#{mbLocacao.locacaoAltera.dataLocacao}"/>
+						
+						<h:outputText value="Data de Devolução"/>
+						<p:calendar value="#{mbLocacao.locacaoAltera.dataDevolucao}"/>
+						
+						<p:commandButton value="Devolver" action="#{mbLocacao.devolver}" ajax="true" update=":form1, :form2"
+						onclick="PF('janela').hide()"/>						
+					
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>	
+			<p:dialog widgetVar="janela2" modal="false" header="Envio de Email">
+				<h:form id="form3">
+					<p:panelGrid columns="2">
+					
+						<h:outputText value="Id locação"/>
+						<h:inputHidden value="#{mbLocacao.locacaoAltera.idLocacao}"/>
+						
+						<h:outputText value="Para"/>
+						<p:inputText value="#{mbLocacao.cliente.email}" size="58"/>
+						
+						<h:outputText value="Assunto"/>
+						<p:inputText value="#{mbLocacao.mensagem.assunto}" size="58"/>
+						
+						<h:outputText value="Mensagem"/>
+						<h:inputTextarea value="#{mbLocacao.mensagem.texto}" rows="5" cols="50"/>
+						
+						<p:commandButton value="Enviar" action="#{mbLocacao.enviar}" ajax="true" update=":form1, :form3"
+						onclick="PF('janela2').hide()"/>						
+					
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>	
+			<p:dialog widgetVar="janela3" modal="false" header="Mensagens">
+				<h:form id="form4">
+					<p:dataTable value="#{mbLocacao.listaMensagem}" var="linha">
+						
+						<p:column headerText="Para">
+							<h:outputText value="#{linha.para}"/>
+						</p:column>
+						
+						<p:column headerText="Assunto">
+							<h:outputText value="#{linha.assunto}"/>
+						</p:column>
+						
+						<p:column headerText="Texto">
+							<h:outputText value="#{linha.texto}"/>
+						</p:column>									
+						
+					</p:dataTable>		
+				</h:form>
+			</p:dialog>	
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

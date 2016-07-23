@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+		<p:layoutUnit position="west" resizable="true" size="280" minSize="280" maxSize="280">
+			<p:panel header="Menu">
+				<h:form>
+					<p:menu toggleable="true">
+						<p:submenu label="Cadastros">
+							<p:menuitem value="Clientes" action="cadCliente.jsf"/>
+							<p:menuitem value="Livros" action="cadLivro.jsf"/>								
+							<p:menuitem value="Alugar Livro" action="cadLocacao.jsf"/>				
+						</p:submenu>
+						<p:submenu label="Consultas">
+							<p:menuitem value="Clientes" action="consultaCliente.jsf"/>	
+							<p:menuitem value="Livro" action="consultaLivro.jsf"/>							
+						</p:submenu>	
+						<p:submenu label="Locações">
+							<p:menuitem value="Lista locações" action="consultaLocacao.jsf"/>	
+							<p:menuitem value="Locações Pendentes" action="consultaPendente.jsf"/>							
+						</p:submenu>					
+					</p:menu>
+					<p:commandButton value="Sair" action="#{mbl.deslogar}" ajax="true"/>
+				</h:form>
+			</p:panel>			
+		</p:layoutUnit>		
+</html>

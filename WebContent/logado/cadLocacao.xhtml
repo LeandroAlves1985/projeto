@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:layout style="min-width:400px; min-heigth:200px;">
+		<ui:include src="/template/template.xhtml"></ui:include>
+		<p:layoutUnit position="center">
+			<p:panel header="Locação de Livro">
+				<h:form id="form1">
+					<p:panelGrid columns="2">
+					
+						<h:outputText value="Cliente"/>
+						<p:selectOneMenu value="#{mbLocacao.idCliente}" filter="true" filterMatchMode="startsWith">
+							<f:selectItem itemLabel="Escolha o Cliente"/>
+							<f:selectItems value="#{mbCliente.listaCliente}" var="linha" itemLabel="#{linha.nome}" itemValue="#{linha.idPessoa}"/>
+						</p:selectOneMenu>
+						
+						<h:outputText value="Livro"/>
+						<p:selectOneMenu value="#{mbLocacao.idLivro}" filter="true" filterMatchMode="startsWith">
+							<f:selectItem itemLabel="Escolha o Livro" noSelectionOption="true"/>
+							<f:selectItems value="#{mbLivro.listaLivro}" var="linha" itemLabel="#{linha.nomeLivro}" itemValue="#{linha.idLivro}"/>
+						</p:selectOneMenu>
+						
+						<h:outputText value="Data de Locação"/>
+						<p:calendar value="#{mbLocacao.locacao.dataLocacao}" pattern="dd/MM/yyyy" mask="99/99/9999"/>
+						
+						<p:commandButton value="Augar" action="#{mbLocacao.alugar}" ajax="true" update=":form1"/>
+					
+					</p:panelGrid>
+					<p:messages></p:messages>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

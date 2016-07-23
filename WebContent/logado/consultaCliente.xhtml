@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:layout style="min-width:400px; min-heigth:200px;">
+		<ui:include src="/template/template.xhtml"></ui:include>
+		<p:layoutUnit position="center">
+			<p:panel header="Consulta de Clientes">
+				<h:form id="form1">
+					<p:dataTable value="#{mbCliente.listaCliente2}" var="linha">
+					
+						<p:column headerText="Nome do Cliente" filterBy="#{linha.nome}" filterMatchMode="exact">
+							<h:outputText value="#{linha.nome}"/>
+						</p:column>
+						
+						<p:column headerText="CPF">
+							<h:outputText value="#{linha.cpf}"/>
+						</p:column>
+						
+						<p:column headerText="Editar">
+							<p:commandButton value="Editar" action="#{mbCliente.altera}" ajax="true" update=":form1, :form2"
+							onclick="PF('janela').show()"/>
+						</p:column>
+						
+						<p:column headerText="Excluir">
+							<p:commandButton value="Excluir" action="#{mbCliente.excluir}" ajax="true" update=":form1"/>
+						</p:column>
+					
+					</p:dataTable>
+					<p:messages></p:messages>
+				</h:form>
+			</p:panel>
+			<p:dialog widgetVar="janela" modal="false" header="Atualização de Cliente">
+				<h:form id="form2">
+					<p:panelGrid columns="2">
+						
+						<h:outputText value="Id do Cliente"/>
+						<h:inputHidden value="#{mbCliente.clienteAltera.idPessoa}"/>
+					
+						<h:outputText value="Nome do Cliente"/>
+						<p:inputText value="#{mbCliente.clienteAltera.nome}"/>
+						
+						<h:outputText value="CPF"/>
+						<p:inputText value="#{mbCliente.clienteAltera.cpf}"/>
+						
+						<h:outputText value="Email"/>
+						<p:inputText value="#{mbCliente.clienteAltera.email}"/>
+						
+						<h:outputText value="Id do Endereço"/>
+						<h:inputHidden value="#{mbCliente.endereco.idEndereco}"/>
+						
+						<h:outputText value="Rua"/>
+						<p:inputText value="#{mbCliente.endereco.rua}"/>
+						
+						<h:outputText value="Numero"/>
+						<p:inputText value="#{mbCliente.endereco.casa}"/>
+						
+						<h:outputText value="Bairro"/>
+						<p:inputText value="#{mbCliente.endereco.bairro}"/>
+						
+						<h:outputText value="Cidade"/>
+						<p:inputText value="#{mbCliente.endereco.cidade}"/>
+						
+						<h:outputText value="UF"/>
+						<p:inputText value="#{mbCliente.endereco.uf}"/>
+						
+						<h:outputText value="CEP"/>
+						<p:inputText value="#{mbCliente.endereco.cep}"/>
+						
+						<h:outputText value="Id do Telefone"/>
+						<h:inputHidden value="#{mbCliente.telefone.idTelefone}"/>
+						
+						<h:outputText value="Telefone"/>
+						<p:inputText value="#{mbCliente.telefone.convencional}"/>
+						
+						<h:outputText value="Celular"/>
+						<p:inputText value="#{mbCliente.telefone.celular}"/>
+						
+						<p:commandButton value="Atualizar" action="#{mbCliente.atualizar}" ajax="true" update=":form1, :form2"
+						onclick="PF('janela').hide()"/>
+					
+					</p:panelGrid>
+				</h:form>				
+			</p:dialog>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

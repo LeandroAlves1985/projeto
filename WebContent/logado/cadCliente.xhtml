@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:layout style="min-width:400px; min-heigth:200px;">
+		<ui:include src="/template/template.xhtml"></ui:include>
+		<p:layoutUnit position="center">
+			<p:panel header="Busca Cep">
+				<h:form id="form1">
+					<p:panelGrid columns="2">
+					
+						<h:outputText value="CEP"/>
+						<p:inputMask value="#{mbCliente.MBcep}" mask="99.999-999"/>
+						
+						<p:commandButton value="BuscarCep" action="#{mbCliente.buscarCep}" ajax="true" update=":form1, :form2"/>						
+					
+					</p:panelGrid>
+				</h:form>
+			</p:panel>
+			<p:panel header="Cadastro de Cliente">
+				<h:form id="form2">
+					<p:panelGrid columns="2">
+					
+						<h:outputText value="Nome do Cliente"/>
+						<p:inputText value="#{mbCliente.cliente.nome}"/>
+						
+						<h:outputText value="CPF"/>
+						<p:inputMask value="#{mbCliente.cliente.cpf}" mask="999.999.999-99"/>
+						
+						<h:outputText value="Email"/>
+						<p:inputText value="#{mbCliente.cliente.email}"/>
+						
+						<h:outputText value="Rua"/>
+						<p:inputText value="#{mbCliente.endereco.rua}"/>
+						
+						<h:outputText value="Casa"/>
+						<p:inputText value="#{mbCliente.endereco.casa}"/>
+						
+						<h:outputText value="Bairro"/>
+						<p:inputText value="#{mbCliente.endereco.bairro}"/>
+						
+						<h:outputText value="Cidade"/>
+						<p:inputText value="#{mbCliente.endereco.cidade}"/>
+						
+						<h:outputText value="UF"/>
+						<p:inputText value="#{mbCliente.endereco.uf}"/>
+						
+						<h:outputText value="CEP"/>
+						<p:inputMask value="#{mbCliente.endereco.cep}" mask="99.999-999"/>
+						
+						<h:outputText value="Telefone"/>
+						<p:inputMask value="#{mbCliente.telefone.convencional}" mask="(99)9999-9999"/>
+						
+						<h:outputText value="Celular"/>
+						<p:inputMask value="#{mbCliente.telefone.celular}" mask="(99)99999-9999"/>
+						
+						<p:commandButton value="Cadastrar" action="#{mbCliente.cadastrar}" ajax="true" update=":form1, :form2"/>
+					
+					</p:panelGrid>
+					<p:messages></p:messages>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

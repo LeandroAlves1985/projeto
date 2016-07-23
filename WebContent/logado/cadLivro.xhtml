@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:layout style="min-width:400px; min-heigth:200px;">
+		<ui:include src="/template/template.xhtml"></ui:include>
+		<p:layoutUnit position="center">
+			<p:panel header="Cadastro de Livros">
+				<h:form id="form1">
+					<p:panelGrid columns="2">
+					
+						<h:outputText value="Nome do Livro"/>
+						<p:inputText value="#{mbLivro.livro.nomeLivro}"/>
+						
+						<h:outputText value="Data de Publicação"/>
+						<p:calendar value="#{mbLivro.livro.dataPublicacao}" mask="99/99/9999"/>
+						
+						<h:outputText value="Nome do Autor"/>
+						<p:inputText value="#{mbLivro.livro.nomeAutor}"/>
+						
+						<h:outputText value="Nome da Editora"/>
+						<p:inputText value="#{mbLivro.livro.nomeEditora}"/>
+						
+						<p:commandButton value="Cadastrar" action="#{mbLivro.cadastrar}" ajax="true" update=":form1"/>
+					
+					</p:panelGrid>
+					<p:messages></p:messages>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
