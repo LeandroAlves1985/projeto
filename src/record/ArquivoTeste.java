@@ -7,6 +7,8 @@ public class ArquivoTeste {
 	private String nome;
 	
 	private String email;
+	
+	private String cpf;
 
 	public Integer getId() {
 		return id;
